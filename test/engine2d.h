@@ -39,7 +39,7 @@ void map_printcell(int rawdata)
 			break;
 		case 2:
 			setColor(32,40);
-			printf("m");
+			printf("M");
 			break;
 		case 3:
 			setColor(33,40);
@@ -47,7 +47,7 @@ void map_printcell(int rawdata)
 			break;
 		case 4:
 			setColor(31,40);
-			printf("M");
+			printf("m");
 			break;
 		case 5:
 			setColor(32,40);

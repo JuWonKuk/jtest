@@ -53,7 +53,7 @@ int main()
 	int nCount = 0;
 	int bLoop = 1;
 	int xpos,ypos;
-	xpos = 0; ypos = 1;
+	xpos = 3; ypos = 1;
 	char cmd;
 	while(bLoop)
 	{
@@ -88,6 +88,11 @@ int main()
 		
 		system("clear");
 		drawMyBox(xpos,ypos,44,1);
+		drawMyBox(xpos-1,ypos+1,43,3);
+		drawMyBox(xpos-3,ypos+1,45,1);
+		drawMyBox(xpos+3,ypos+1,45,1);
+		drawMyBox(xpos+2,ypos+4,46,1);
+		drawMyBox(xpos-2,ypos+4,46,1);
 		drawMyBox(nCount,5,42,3);
 		gotoxy(0,20);
 		printf("===================");

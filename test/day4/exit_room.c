@@ -39,9 +39,9 @@ int main()
 				printf("select => [p,x] \r\n");
 				break;
 			case 1:
-				printf("명령을 선택하세요,\r\n \
-						i(up),j(left),k(right),\r\n \
-						m(down),s(show map),x(exit)\r\n");
+				printf("명령을 선택하세요.\r\n");
+				printf("i(up),j(left),k(right).\r\n");
+				printf("m(down),s(show map),x(exit).\r\n");
 				break;
 			case 2:
 				break;
