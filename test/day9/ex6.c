@@ -17,9 +17,14 @@ int main()
 		"dungeon-1",
 		NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
 	};
+	_S_AREA dungeon_2 = {
+		"dungeon-2",
+		NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
+	};
 
 	town.node[0] = &dungeon_1;
 	dungeon_1.node[0] = &town;
+	town.node[1] = &dungeon_2;
 
 	_S_AREA *pCurrentArea = &town;
 	
@@ -43,12 +48,20 @@ int main()
 					printf("이동성공 \r\n");
 					pCurrentArea = pNode;
 				}
+		
 			}
 
 		}
 		else if(!strcmp(pTemp,"help")) {
-			//명령어 설명 출력
-		}
+			char *pszArea = strtok(NULL,"");
+			printf("당신은 %s 으로 이동합니다. \r\n",pszArea);
+			for(int i = 0;i <8;i++) {
+				_S_AREA *pNode = town->node[i];
+				if(pNode == NULL) break;
+				else {
+					printf("이동목록: %s \r\n",pNode);
+				}
+				
 		else if(!strcmp(pTemp,"exit")) {
 			bLoop = 0;
 		}

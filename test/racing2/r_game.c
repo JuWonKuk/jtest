@@ -141,6 +141,7 @@ int main()
 		last_tick = cur_tick;
 
 		if(nFSM == 0) { //타이틀 메뉴 상태
+			puts("press to start");
 			rg_apply_mainTitle(delta_tick);
 		}
 		else if(nFSM == 1) { //게임상태...
