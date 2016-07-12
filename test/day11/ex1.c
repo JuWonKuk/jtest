@@ -8,21 +8,10 @@
 #include <termios.h>
 
 #include "../engine/engine2d.h"
-
-typedef struct
-{
-	int m_nSkima;
-	int m_nWidth;
-	int m_nHeight;
-} _S_MAP_HEADER;
-
-typedef struct
-{
-	_S_MAP_HEADER m_header;
-	char *m_pBuf;
-} _S_MAP_OBJECT;
+#include "map.h"
 
 _S_MAP_OBJECT MapObject;
+
 int main()
 {
 	int bLoop = 1;
@@ -43,19 +32,12 @@ int main()
 			}
 		}
 		else if(!strcmp(pTemp,"dump")) {
-			putTile(0,MapObject.m_header.m_nHeight,0,MapObject.m_header.
-			m_nWidth,MapObject.m_header.m_nWidth,MapObject.m_pBuf,TilePalette);	
+			map_dump(&MapObject,TilePalette);
 		}
 		else if(!strcmp(pTemp,"new")) {
-			//new 8 4
-			if(MapObject.m_pBuf != NULL) { free(MapObject.m_pBuf); }
-			MapObject.m_header.m_nWidth = atoi(strtok(NULL," "));
-			MapObject.m_header.m_nHeight = atoi(strtok(NULL," "));
-			MapObject.m_pBuf = malloc( MapObject.m_header.m_nHeight * MapObject.m_header.m_nWidth);
-			
-			for(int i=0;i <  MapObject.m_header.m_nHeight * MapObject.m_header.m_nWidth;i++) {
-				MapObject.m_pBuf[i] = 0;
-			}
+			int nWidth = atoi(strtok(NULL," "));
+			int nHeight = atoi(strtok(NULL," "));
+			map_new(&MapObject,nWidth,nHeight);
 		}
 		else if(!strcmp(pTemp,"put")) {
 			//put 1 2 2 (x y tile_index)
@@ -64,7 +46,8 @@ int main()
 			y = atoi(strtok(NULL," "));
 			tile_index = atoi(strtok(NULL," "));
 			
-			MapObject.m_pBuf[y*MapObject.m_header.m_nWidth + x] = tile_index ;
+			//MapObject.m_pBuf[y*MapObject.m_header.m_nWidth + x] = tile_index ;
+			map_PutTile(&MapObject,x,y,tile_index);
 		}
 		else if(!strcmp(pTemp,"hline")) {
 			int xpos,tile_index;
@@ -86,21 +69,40 @@ int main()
 		}
 		else if( !strcmp(pTemp,"save")) {
 			//save filename
-			
-
+			char *pTemp = strtok(NULL," ");
+			map_save(&MapObject,pTemp);
+			puts("save ok");
 		}
 		else if( !strcmp(pTemp,"load")) {
 			//load filename
-			char *load;
-			load =strtok(NULL," ");
-			FILE *fp1 = fopen("ex2.data.txt","r");
-			while(1) {
-				char ch = getchar();
-				if(ch==EOF) break;
-				fputs(ch, fp1);
+			char *pTemp = strtok(NULL," ");
+			map_load(&MapObject,pTemp);
+			puts("load ok");
+		
+		}
+		else if(!strcmp(pTemp,"tridraw_1")) {
+			//tridraw_1 1
+			int tile_index = atoi(strtok(NULL," "));
+			for(int y = 0;y < MapObject.m_header.m_nHeight;y++) {
+				for(int x = 0;x < y+1 ;x++) {
+					MapObject.m_pBuf[y*MapObject.m_header.m_nWidth + x] = tile_index;
+				}
 			}
-			fclose(fp1);
-			
+		}
+		else if(!strcmp(pTemp,"draw_cross")) {
+			//draw_cross 1 2 1
+			int x,y,tile_index;
+			x = atoi(strtok(NULL," "));
+			y = atoi(strtok(NULL," "));
+			tile_index = atoi(strtok(NULL," "));
+			for(int iy =-1;iy <2;iy++) {
+				for(int ix=-1;ix < 2;ix++) {
+					MapObject.m_pBuf[(iy+y)*MapObject.m_header.m_nHeight + x] = tile_index;
+					MapObject.m_pBuf[y*MapObject.m_header.m_nWidth +(ix+x)] = tile_index;
+
+				}
+			}
+
 		}
 
 	}
