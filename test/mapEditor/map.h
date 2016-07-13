@@ -16,6 +16,7 @@ typedef struct
 
 extern char Default_Tilepalette[];
 
+void map_drawTile_trn(_S_MAP_OBJECT *pObj,int xpos,int ypos,_S_MAP_OBJECT *pTarget);
 void map_init(_S_MAP_OBJECT *pObj); 
 void map_dump(_S_MAP_OBJECT *pObj,char *pTile_pal);
 void map_new(_S_MAP_OBJECT *pObj,int nWidth,int nHeight);
