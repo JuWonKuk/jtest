@@ -22,6 +22,15 @@ char Default_Tilepalette[] = {
 void map_init(_S_MAP_OBJECT *pObj) 
 {
 	pObj->m_pBuf = NULL;
+	pObj->fpLoad = map_load;
+	pObj->fpSave = map_save;
+	pObj->fpDump = map_dump;
+	pObj->fpNew = map_new;
+	pObj->fpPutTile = map_PutTile;
+	pObj->fpDrawTile = map_drawTile;
+	pObj->fpDrawTile_trn = map_drawTile_trn;
+	pObj->fpDrawTile_v = map_drawTile_mirror_v;
+	pObj->fpDrawTile_h = map_drawTile_mirror_h;
 }
 
 void map_dump(_S_MAP_OBJECT *pObj,char *pTile_pal)
