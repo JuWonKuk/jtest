@@ -73,6 +73,12 @@ int main()
 			else if(ch == 'd') {
 				targetx += 1;
 			}
+			else if(ch == 'w') {
+				targety -= 1;
+			}
+			else if(ch == 's') {
+				targety += 1;
+			}
 		}
 		/////////////////////////////////
 
