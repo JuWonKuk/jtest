@@ -65,10 +65,11 @@ int main()
 	int fire_x2, fire_y2;
 	while(bLoop) {
 		//비행기
-		targetx = gPotabObject.m_nXpos;
-		targety = gPotabObject.m_nYpos;
-		fire_x = gPlayerObject.m_nXpos;
-		fire_y = gPlayerObject.m_nYpos;
+		targetx = gPlayerObject.m_nXpos;
+		targety = gPlayerObject.m_nYpos;
+		fire_x = gPotabObject.m_nXpos;
+		fire_y = gPotabObject.m_nYpos;
+
 		//포탑
 
 		//double vx2, vy2, c2;
@@ -81,7 +82,6 @@ int main()
 		//targety2 = gPlayerObject.m_nYpos;
 		//fire_x2 = gPotabObject.m_nXpos;
 		//fire_y2 = gPotabObject.m_nYpos;
-
 
 		//타이밍 처리
 		clock_gettime(CLOCK_MONOTONIC, &work_timer);
@@ -103,7 +103,7 @@ int main()
 				c = sqrt(vx*vx + vy*vy);
 				vx /=c; vy /= c;
 
-				bullet_fire(&gBulletObject,fire_x,fire_y,vx,vy,10.0,10.0);
+				bullet_fire(&gBulletObject,fire_x,fire_y,vx,vy,10.0,5.0);
 
 			//bullet_fire(&gBulletObject2,fire_x2,fire_y2,vx2,vy2,10.0,10.0);
 			}
@@ -131,7 +131,6 @@ int main()
 			map_dump(&gScreenBuf[1],Default_Tilepalette);
 			acc_tick = 0;
 		}
-
 	}
 
 	return 0;

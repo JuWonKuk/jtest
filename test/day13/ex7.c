@@ -36,6 +36,13 @@ int main()
 	center_y = 7;
 	target_x = 14;
 	target_y = 3;
+	double target_x2,target_y2;
+	double center_x2,center_y2;
+	center_x2 = 14;
+	center_y2 = 3;
+	target_x2 = 14;
+	target_y2 = 2;
+
 	double angle = 0;
 	while(bLoop) {
 		//타이밍 처리
@@ -64,6 +71,15 @@ int main()
 
 		tx += center_x;
 		ty += center_y;
+		
+		double tx2,ty2;
+		double rad2 = angle/180 * 3.141592; 
+		tx2 = (target_x2-center_x2) * cos(rad2) - (target_y2 - center_y2)*sin(rad2) ;
+		ty2 = (target_x2-center_x2) * sin(rad2) + (target_y2 - center_y2)*cos(rad2) ;
+
+		tx2 += center_x2;
+		ty2 += center_y2;
+
 
 		//타이밍 계산
 		acc_tick += delta_tick;
@@ -73,6 +89,7 @@ int main()
 			map_PutTile(&gScreenBuffer[1],tx,ty,2);
 			map_PutTile(&gScreenBuffer[1],center_x,center_y,5);
 			map_PutTile(&gScreenBuffer[1],target_x,target_y,1);
+			map_PutTile(&gScreenBuffer[1],target_x2,target_y2,3);
 			gotoxy(0,0);
 			map_dump(&gScreenBuffer[1],Default_Tilepalette);
 			acc_tick = 0;
