@@ -134,25 +134,35 @@ int main()
 			else if(ch == 'j') {
 				for(int i =0;i<32;i++) {
 					_S_BULLET_OBJECT *pObj = &gBulletObjects[i];
-					double vx,vy;
-					pObj->m_fXpos=0;
-					pObj->m_fYpos=0;
+					//double vx,vy;
+					//pObj->m_fXpos=0;
+					//pObj->m_fYpos=0;
 
 					//getDirection(pObj,&gAlienObjects[i],&vx,&vy);
-					pObj->m_fvx=0;
-					pObj->pfFire(pObj,gPlayerObject.m_fXpos,gPlayerObject.m_fYpos,pObj->m_fCenterX,pObj->m_fCenterY,10.0,10.0);
+					//pObj->m_fvx=0;
+					//pObj->pfFire(pObj,gPlayerObject.m_fXpos,gPlayerObject.m_fYpos,-1,-1,10.0,10.0);
 					pObj->m_nFSM =1;
 				}
-
 			}
-			gPlayerObject.pfApply(&gPlayerObject,delta_tick,ch);
+			if(acc_tick += delta_tick > 0.5) {
+				//for(int i=0;i<32;i++) {
+				//gBulletObjects2->pfFire(&gBulletObjects2[i],gAlienObjects[i].m_fXpos,
+				//gAlienObjects->m_fYpos,1,1,10.0,10.0);
+				gBulletObjects2->m_nFSM = 1;
+				for(int i =0;i<32;i++) {
+					_S_BULLET_OBJECT *pObj = &gBulletObjects2[i];
+					pObj->pfApply(pObj,delta_tick);
+				}
+			}	
 
-		}
-		
+			gPlayerObject.pfApply(&gPlayerObject,delta_tick,ch);
 		for(int i=0;i<4;i++ ) 
 		{
 			_S_ALIEN_OBJECT *pObj = &gAlienObjects[i];
 			pObj->pfApply(pObj,delta_tick);
+			//double dist = getDistance(&gBulletObjects2,&pObj);
+
+			//if(dist < 
 
 		}
 		for(int i =0;i<32;i++) {
@@ -161,19 +171,20 @@ int main()
 			if(pObj->m_nFSM != 0) {
 
 				double dist = getDistance(pObj,&gPlayerObject);	
-				/*
-				if(dist < 0.25) {
-					pObj->m_nFSM = 0;
+				
+				if(dist < 1.0) {
+					//pObj->m_nFSM = 0;
 					for(int i=0;i<8;i++) {
 						_S_ALIEN_OBJECT *pObj = &gAlienObjects[i];
-						pObj->m_nFSM = 0;
+						//pObj->m_nFSM = 0;
+						//gPlayerObject.m_nFSM = 0;
 					}
 				}
-				*/
+				
 			}
 
 		}
-
+	}
 
 		//타이밍 계산 
 		acc_tick += delta_tick;
@@ -184,6 +195,10 @@ int main()
 			gPlayerObject.pfDraw(&gPlayerObject,&gScreenBuf[1]);
 			for(int i =0;i<32;i++) {
 				_S_BULLET_OBJECT *pObj = &gBulletObjects[i];
+				pObj->pfDraw(pObj,&gScreenBuf[1]);
+			}
+			for(int i =0;i<32;i++) {
+				_S_BULLET_OBJECT *pObj = &gBulletObjects2[i];
 				pObj->pfDraw(pObj,&gScreenBuf[1]);
 			}
 
