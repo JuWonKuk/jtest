@@ -208,7 +208,7 @@ int main()
 				pObj->pfDraw(pObj,&gScreenBuf[1]);
 			}
 			
-			map_dump(&gScreenBuf[1],Default_Tilepalette);
+			map_dump(&gScreenBuf[1],Default_Tilepalete);
 			acc_tick = 0;
 		}
 

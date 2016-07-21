@@ -1,14 +1,15 @@
 #include <stdio.h>
-/*
-void Reverse(int array[])
+
+void Reverse(int *arr)
 {
-	
-	for(int i =0;i<5;i++) {
-		int array_list[i] = array[];		
-		array_list[i] = array_list[4-i];
+	int temp;
+	for(int i =0;i<2;i++) {
+		temp=arr[i];
+		arr[i] = arr[4-i];		
+		arr[4-i] = temp;
 	}
 }
-*/
+
 // temp = a, a = b, b = temp
 int main()
 {
@@ -17,19 +18,23 @@ int main()
 	for(int i=0;i <5;i++) {
 		printf("%d ",array_test[i]);
 	}
-	puts("");
-	for(int i=0; i<5;i++) {
+	
+	/*
+	for(int i=0; i<2;i++) {
 		int temp;
 		temp = array_test[i];
 		array_test[i] = array_test[4-i];
 		array_test[4-i] = temp;
 		printf("%d ",array_test[i]);
-		//i =0,0 4 
-		//i =1,1 3
-		//i =2,2 2
-		//i =3,3 1
-		//i =4,4 0
+		//i =0,0 4 i=0/temp=1/arr0 = 5/arr4=temp 1
+		//i =1,1 3 i=1/temp=2/arr1 = 4/arr3=temp 2
+		//i =2,2 2 i=2/temp=3/arr2 = 3/arr2=temp 3
+		//i =3,3 1 i=3/temp=4/arr3 = 4/arr1=temp 4
+		//i =4,4 0 i=4/temp=5/arr4 = 5/arr0=temp 5
 	}
+	*/
+	Reverse(array_test);
+
 	puts("");
 	for(int i=0;i <5;i++) {
 		printf("%d ",array_test[i]);
